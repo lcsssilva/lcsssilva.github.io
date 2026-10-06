@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfólio de Lucas Silva dos Santos — Desenvolvimento back-end, APIs, integrações, bancos de dados, Laravel, PHP, Java/Spring Boot e Flutter." />
+  <title>Lucas Silva — Desenvolvedor Back-end</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b12;
+      --panel: #0d131d;
+      --panel-2: #111927;
+      --text: #eef4ff;
+      --muted: #9babbe;
+      --line: rgba(255,255,255,.08);
+      --accent: #63e6be;
+      --accent-2: #74c0fc;
+      --shadow: 0 18px 55px rgba(0,0,0,.26);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(99,230,190,.10), transparent 28%),
+        radial-gradient(circle at 82% 8%, rgba(116,192,252,.10), transparent 30%),
+        var(--bg);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+
+    .nav {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(7,11,18,.72);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; gap: 10px; align-items: center; font-weight: 800; letter-spacing: -.02em; }
+    .brand-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 22px rgba(99,230,190,.7); }
+    .nav-links { display: flex; gap: 24px; color: var(--muted); font-size: 14px; }
+    .nav-links a:hover { color: var(--text); }
+
+    .hero { padding: 92px 0 70px; }
+    .hero-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 52px; align-items: center; }
+    .eyebrow { color: var(--accent); font: 600 13px/1.2 "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .09em; }
+    h1 { margin: 14px 0 18px; font-size: clamp(44px, 6vw, 76px); line-height: .98; letter-spacing: -.055em; }
+    .hero p { max-width: 700px; color: var(--muted); font-size: 19px; margin: 0; }
+    .hero-actions { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 46px; padding: 0 17px; border-radius: 12px;
+      border: 1px solid var(--line); background: var(--panel); color: var(--text); font-weight: 600;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .btn:hover { transform: translateY(-2px); border-color: rgba(116,192,252,.4); }
+    .btn.primary { background: var(--text); color: #09101a; border-color: transparent; }
+    .btn.primary:hover { background: #dce7f7; }
+
+    .profile-card { background: linear-gradient(180deg, rgba(17,25,39,.94), rgba(10,15,24,.94)); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
+    .profile-head { display: flex; align-items: center; gap: 15px; }
+    .avatar { width: 72px; height: 72px; border-radius: 18px; object-fit: cover; border: 1px solid var(--line); }
+    .profile-card h2 { margin: 0; font-size: 20px; }
+    .profile-card small { color: var(--muted); }
+    .profile-meta { display: grid; gap: 10px; margin-top: 22px; }
+    .meta-row { display: flex; justify-content: space-between; gap: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line); font-size: 14px; }
+    .meta-row span:first-child { color: var(--muted); }
+    .mono { font-family: "JetBrains Mono", monospace; }
+
+    section { padding: 78px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 28px; }
+    .section-head h2 { margin: 0; font-size: 32px; letter-spacing: -.04em; }
+    .section-head p { color: var(--muted); margin: 0; max-width: 620px; }
+
+    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .card { background: rgba(13,19,29,.8); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+    .card h3 { margin: 0 0 10px; font-size: 19px; }
+    .card p { margin: 0; color: var(--muted); }
+
+    .skills { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+    .pill { border: 1px solid var(--line); background: rgba(255,255,255,.025); border-radius: 999px; padding: 7px 11px; color: #cfe1f7; font-size: 13px; }
+
+    .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .project { position: relative; overflow: hidden; }
+    .project::before { content: ""; position: absolute; inset: 0 auto auto 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); opacity: .85; }
+    .project-top { display: flex; justify-content: space-between; gap: 14px; align-items: start; }
+    .project h3 { font-size: 20px; margin-bottom: 4px; }
+    .project .type { font: 500 11px "JetBrains Mono", monospace; color: var(--accent); text-transform: uppercase; letter-spacing: .06em; }
+    .project p { margin: 14px 0 18px; color: var(--muted); }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .project-actions { display: flex; gap: 9px; margin-top: 20px; }
+    .project-actions a { font-size: 13px; color: #c8e7ff; }
+    .project-actions a:hover { text-decoration: underline; }
+    .featured { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(99,230,190,.08), rgba(116,192,252,.04) 45%, rgba(13,19,29,.95)); }
+
+    .timeline { border-left: 1px solid var(--line); padding-left: 24px; display: grid; gap: 26px; }
+    .timeline-item { position: relative; }
+    .timeline-item::before { content: ""; position: absolute; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); left: -29px; top: 7px; box-shadow: 0 0 0 5px rgba(99,230,190,.08); }
+    .timeline-item strong { display: block; }
+    .timeline-item span { display: block; color: var(--muted); font-size: 14px; margin: 2px 0 7px; }
+    .timeline-item p { margin: 0; color: var(--muted); }
+
+    .contact { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
+    .contact-box { display: flex; flex-direction: column; justify-content: space-between; min-height: 250px; }
+    .contact-links { display: grid; gap: 10px; margin-top: 20px; }
+    .contact-link { display: flex; justify-content: space-between; gap: 15px; align-items: center; padding: 13px 14px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.02); }
+    .contact-link small { color: var(--muted); }
+
+    footer { padding: 28px 0 45px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
+    footer .container { display: flex; justify-content: space-between; gap: 20px; }
+
+    @media (max-width: 860px) {
+      .hero-grid, .about, .contact { grid-template-columns: 1fr; }
+      .projects { grid-template-columns: 1fr; }
+      .featured { grid-column: auto; }
+      .nav-links { display: none; }
+      .hero { padding-top: 62px; }
+    }
+    @media (max-width: 520px) {
+      .container { width: min(100% - 26px, 1120px); }
+      h1 { font-size: 46px; }
+      .hero p { font-size: 17px; }
+      section { padding: 60px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top"><span class="brand-dot"></span> Lucas Silva</a>
+      <nav class="nav-links" aria-label="Principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#stack">Stack</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Desenvolvedor Back-end</div>
+          <h1>Construo APIs e sistemas que resolvem problemas reais.</h1>
+          <p>
+            Desenvolvedor com mais de 4 anos de experiência em desenvolvimento web,
+            APIs REST, integração de sistemas e bancos de dados. Atuo principalmente com
+            PHP/Laravel e Java/Spring Boot, além de criar aplicações com Flutter.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#projetos">Ver projetos</a>
+            <a class="btn" href="https://github.com/lcsssilva" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="btn" href="https://www.linkedin.com/in/lucas-silvas/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+
+        <aside class="profile-card">
+          <div class="profile-head">
+            <img class="avatar" src="https://avatars.githubusercontent.com/u/13892814?v=4" alt="Lucas Silva dos Santos" />
+            <div>
+              <h2>Lucas Silva dos Santos</h2>
+              <small>@lcsssilva</small>
+            </div>
+          </div>
+          <div class="profile-meta">
+            <div class="meta-row"><span>Foco</span><strong>Back-end & APIs</strong></div>
+            <div class="meta-row"><span>GitHub</span><strong class="mono">lcsssilva</strong></div>
+            <div class="meta-row"><span>Open source</span><strong>eRede Laravel</strong></div>
+            <div class="meta-row"><span>Também crio</span><strong>Apps e sistemas desktop</strong></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Perfil</div>
+            <h2>Um perfil orientado a produto e engenharia.</h2>
+          </div>
+          <p>Do banco de dados à interface, com mais ênfase em arquitetura de back-end, integrações e regras de negócio.</p>
+        </div>
+        <div class="about">
+          <article class="card">
+            <h3>O que faço</h3>
+            <p>
+              Desenvolvimento de APIs REST, integração entre sistemas, autenticação,
+              persistência em bancos relacionais e construção de aplicações web e desktop.
+              Também trabalho com soluções que conectam front-end, APIs e serviços externos.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Como trabalho</h3>
+            <p>
+              Gosto de separar responsabilidades, validar regras de negócio e tratar
+              testes como parte do desenvolvimento. Em projetos recentes também venho
+              explorando integração de pagamentos, tipagem forte e qualidade de código.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Projetos selecionados</div>
+            <h2>Projetos que mostram evolução técnica.</h2>
+          </div>
+          <p>Selecionados a partir dos seus repositórios públicos no GitHub, priorizando os que melhor representam seu perfil atual.</p>
+        </div>
+
+        <div class="projects">
+          <article class="card project featured">
+            <div class="project-top">
+              <div><div class="type">Destaque • Open source</div><h3>eRede Laravel</h3></div>
+              <span class="pill">Laravel Package</span>
+            </div>
+            <p>
+              Pacote Laravel para integração com a API de pagamentos eRede. O projeto reúne
+              Facade, Service Provider, DTOs tipados, tokenização, PIX e cartão de crédito,
+              OAuth 2.0 com cache de tokens e suporte às versões Laravel 10, 11 e 12 com PHP 8.2+.
+            </p>
+            <div class="project-tags">
+              <span class="pill">PHP 8.2+</span><span class="pill">Laravel</span><span class="pill">OAuth 2.0</span>
+              <span class="pill">PIX</span><span class="pill">Cartão</span><span class="pill">DTOs</span><span class="pill">Pest</span>
+            </div>
+            <div class="project-actions"><a href="https://github.com/lcsssilva/eRede-laravel" target="_blank" rel="noreferrer">Ver repositório ↗</a><a href="https://packagist.org/packages/lcsssilva/erede-laravel" target="_blank" rel="noreferrer">Packagist ↗</a></div>
+          </article>
+
+          <article class="card project">
+            <div class="project-top"><div><div class="type">Aplicação</div><h3>LuStore • PDV Desktop</h3></div><span class="pill">Flutter</span></div>
+            <p>Aplicação desktop de ponto de venda conectada a uma API, com vendas, produtos, categorias e relatórios de lucro e desempenho.</p>
+            <div class="project-tags"><span class="pill">Flutter</span><span class="pill">HTTP/API</span><span class="pill">JWT</span><span class="pill">Charts</span></div>
+            <div class="project-actions"><a href="https://github.com/lcsssilva/pdv_desktop" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+          </article>
+
+          <article class="card project">
+            <div class="project-top"><div><div class="type">Aplicação</div><h3>LuStore • PDV App</h3></div><span class="pill">Flutter</span></div>
+            <p>Aplicação do ecossistema de PDV com autenticação JWT, armazenamento local, busca, paginação e visualização de indicadores.</p>
+            <div class="project-tags"><span class="pill">Flutter</span><span class="pill">GetX</span><span class="pill">JWT</span><span class="pill">Paginação</span></div>
+            <div class="project-actions"><a href="https://github.com/lcsssilva/app_pdv" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+          </article>
+
+          <article class="card project">
+            <div class="project-top"><div><div class="type">API / estudos</div><h3>Clean TypeScript API</h3></div><span class="pill">TypeScript</span></div>
+            <p>Projeto com Express, MongoDB, Jest e Supertest, incluindo validação, autenticação com bcrypt e organização voltada a testes.</p>
+            <div class="project-tags"><span class="pill">TypeScript</span><span class="pill">Express</span><span class="pill">MongoDB</span><span class="pill">Jest</span><span class="pill">Supertest</span></div>
+            <div class="project-actions"><a href="https://github.com/lcsssilva/clean-ts-api-course" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+          </article>
+
+          <article class="card project">
+            <div class="project-top"><div><div class="type">Web / PHP</div><h3>CRUD Product Tag</h3></div><span class="pill">PHP</span></div>
+            <p>Sistema com login, dashboard e relatórios de uso de tags, além de CRUD de produtos e tags. Desenvolvido com PHP, Bootstrap e Docker/Nginx.</p>
+            <div class="project-tags"><span class="pill">PHP</span><span class="pill">Bootstrap</span><span class="pill">Docker</span><span class="pill">Nginx</span><span class="pill">SQL</span></div>
+            <div class="project-actions"><a href="https://github.com/lcsssilva/crud-product-tag" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+          </article>
+
+          <article class="card project">
+            <div class="project-top"><div><div class="type">Aplicação</div><h3>Mercado Livre Frontend</h3></div><span class="pill">Flutter</span></div>
+            <p>Aplicação Flutter com login por Google/e-mail e persistência de dados usando Firebase Authentication e Cloud Firestore.</p>
+            <div class="project-tags"><span class="pill">Flutter</span><span class="pill">Firebase Auth</span><span class="pill">Firestore</span><span class="pill">Google Sign-In</span></div>
+            <div class="project-actions"><a href="https://github.com/lcsssilva/app_mercadolivre_frontend" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow">Tecnologias</div><h2>Stack principal</h2></div>
+          <p>Ferramentas presentes no currículo e nos projetos públicos consultados.</p>
+        </div>
+        <div class="card">
+          <div class="skills">
+            <span class="pill">Java</span><span class="pill">Spring Boot</span><span class="pill">PHP</span><span class="pill">Laravel</span>
+            <span class="pill">REST APIs</span><span class="pill">MySQL</span><span class="pill">PostgreSQL</span><span class="pill">MongoDB</span>
+            <span class="pill">Flutter</span><span class="pill">Dart</span><span class="pill">TypeScript</span><span class="pill">Node.js</span>
+            <span class="pill">Git</span><span class="pill">Linux</span><span class="pill">Docker</span><span class="pill">Jest</span><span class="pill">Pest</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow">Contato</div><h2>Vamos conversar sobre desenvolvimento?</h2></div>
+          <p>Para vagas, freelas, projetos ou integrações, meus perfis públicos são o melhor ponto de partida.</p>
+        </div>
+        <div class="contact">
+          <article class="card contact-box">
+            <div>
+              <h3>Lucas Silva dos Santos</h3>
+              <p>Desenvolvedor Back-end • APIs • Integrações • Aplicações web e desktop</p>
+            </div>
+            <div class="contact-links">
+              <a class="contact-link" href="mailto:lcs13761@gmail.com"><span>Email</span><small>lcs13761@gmail.com</small></a>
+              <a class="contact-link" href="https://github.com/lcsssilva" target="_blank" rel="noreferrer"><span>GitHub</span><small>github.com/lcsssilva</small></a>
+              <a class="contact-link" href="https://www.linkedin.com/in/lucas-silvas/" target="_blank" rel="noreferrer"><span>LinkedIn</span><small>linkedin.com/in/lucas-silvas</small></a>
+            </div>
+          </article>
+          <article class="card contact-box">
+            <div>
+              <h3>Em uma frase</h3>
+              <p>Transformo regras de negócio em APIs, integrações e aplicações que podem ser usadas no mundo real.</p>
+            </div>
+            <a class="btn primary" href="https://github.com/lcsssilva" target="_blank" rel="noreferrer">Conhecer meu GitHub ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>© <span id="year"></span> Lucas Silva dos Santos</span>
+      <span>Portfólio baseado em dados públicos do GitHub e referências profissionais disponíveis.</span>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
